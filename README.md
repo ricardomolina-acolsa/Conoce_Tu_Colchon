@@ -20,13 +20,11 @@ Abre `index.html` en un navegador o sirve la carpeta con una extensión como Liv
 
 ## Lógica del cuestionario
 
-- Las respuestas dan un punto base a los modelos; las coincidencias reciben puntos adicionales. Las reglas especiales de cuidador, movilidad, peso y niveles 3/4 de úlceras otorgan una ponderación mayor.
-- La pregunta de presupuesto solo otorga puntos a los modelos asociados al rango elegido. El presupuesto no elimina por sí solo las demás alternativas.
-- La capacidad máxima de peso funciona como filtro de compatibilidad cuando se conoce el peso. En rangos, el prototipo usa el extremo superior como criterio conservador.
-- Se muestran hasta cinco modelos con puntaje positivo, ordenados de mayor a menor puntuación.
-- Cada tarjeta enlaza a la página del producto y a contacto para solicitar una cotización por volumen.
-- La selección de un nivel de úlcera influye en la puntuación según la asociación de catálogo proporcionada, pero no constituye recomendación clínica ni confirma idoneidad médica.
-- Si no se encuentra una opción compatible, el resultado invita a contactar a acolsa.mx por la página de contacto, al 55 7638 4584 o a ventas@acolsa.mx.
+- Tres respuestas (tiempo diario, duración prevista y movilidad) asignan puntos a Ambulatorio, Unidad de recuperación y Terapia/cuidados intensivos.
+- La capacidad máxima de peso funciona como filtro de compatibilidad cuando se conoce el peso.
+- La base, la presencia de cuidador, el presupuesto y la duración estimada ajustan el orden de los modelos.
+- Cuando se selecciona un nivel de úlcera diagnosticado, se muestran únicamente los modelos asociados a ese nivel en la tabla de catálogo proporcionada para este prototipo. Esto no constituye recomendación clínica ni confirma idoneidad médica.
+- Si el presupuesto no alcanza para los modelos que coinciden, se puede mostrar una alternativa fuera de presupuesto claramente identificada.
 - No se envían las respuestas a un servidor.
 
 ## Antes de publicar para clientes
@@ -35,7 +33,6 @@ Verifica con el equipo de producto y profesionales sanitarios todas las especifi
 
 - Confirma capacidades máximas de peso, precios, garantías, vida útil, compatibilidad con bases y requisitos de instalación.
 - Revisa que las imágenes remotas sigan disponibles y que el uso comercial esté permitido.
-- Confirma los enlaces de tienda y los rangos de presupuesto asociados a cada producto antes de publicar.
 - Valida la lógica de puntuación con el equipo comercial y sanitario. Las asociaciones de producto por nivel de úlcera son las proporcionadas para el prototipo y no deben presentarse como indicación clínica universal.
 - Los colchones no sustituyen la atención médica, la valoración de úlceras por presión ni los cambios de posición y cuidados indicados por el equipo sanitario.
 - No presentes esta web como instrumento de diagnóstico o prescripción.
