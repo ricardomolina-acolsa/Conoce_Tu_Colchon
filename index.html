@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f4">
+  <meta name="description" content="Encuentra una opción de colchón hospitalario según tus necesidades.">
+  <title>Encuentra tu colchón | Acolsa</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Inicio Acolsa">
+        <span class="brand-mark">A</span><span>ACOLSA <small>DESCANSO Y CUIDADO</small></span>
+      </a>
+      <span class="top-note">Asistente de selección</span>
+    </header>
+
+    <section class="intro" id="intro">
+      <p class="eyebrow"><span class="dot"></span> ENCUENTRA UNA OPCIÓN ADECUADA</p>
+      <h1>Elegir un colchón<br><em>puede ser más sencillo.</em></h1>
+      <p class="intro-copy">Responde unas preguntas breves sobre el uso y las necesidades de la persona. Te orientaremos hacia opciones que vale la pena revisar.</p>
+      <div class="intro-meta">
+        <span><span class="meta-icon">◷</span> 2 minutos aprox.</span>
+        <span><span class="meta-icon">✓</span> Sin compromiso</span>
+      </div>
+      <button class="primary" id="startBtn">Comenzar <span aria-hidden="true">→</span></button>
+      <p class="fineprint">Esta herramienta ofrece orientación comercial; no sustituye la valoración de un profesional de la salud.</p>
+    </section>
+
+    <section class="quiz hidden" id="quiz" aria-live="polite">
+      <div class="quiz-head">
+        <button class="back-btn" id="backBtn" aria-label="Volver a la pregunta anterior">← <span>Anterior</span></button>
+        <span class="step-label" id="stepLabel">PREGUNTA 1 DE 6</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="question-area">
+        <p class="eyebrow" id="questionCategory">CONTEXTO</p>
+        <h2 id="questionTitle">¿Para quién estás buscando un colchón?</h2>
+        <p class="question-help" id="questionHelp"></p>
+        <div class="options" id="options"></div>
+      </div>
+      <p class="quiz-foot">Tus respuestas se utilizan en esta sesión para orientar el resultado.</p>
+    </section>
+
+    <section class="results hidden" id="results" aria-live="polite">
+      <p class="eyebrow"><span class="dot"></span> TU ORIENTACIÓN</p>
+      <h2 id="resultTitle">Estas opciones pueden ser un buen punto de partida.</h2>
+      <p class="result-copy" id="resultCopy"></p>
+      <div class="result-card">
+        <div class="product-art" aria-hidden="true">
+          <div class="mattress">
+            <div class="mattress-top"></div><div class="mattress-side"></div>
+          </div>
+          <span class="art-caption">ACOLSA · LÍNEA HOSPITALARIA</span>
+        </div>
+        <div class="product-info">
+          <span class="product-tag" id="productTag">OPCIÓN POR REVISAR</span>
+          <h3 id="productName">Colchón hospitalario</h3>
+          <p id="productDescription"></p>
+          <div class="why-title">Por qué aparece esta opción</div>
+          <ul id="reasons"></ul>
+          <p class="placeholder-note" id="placeholderNote"></p>
+          <a class="primary link-button" id="contactLink" href="https://acolsa.mx/" target="_blank" rel="noopener">Consultar con Acolsa <span>↗</span></a>
+        </div>
+      </div>
+      <div class="next-actions">
+        <button class="secondary" id="restartBtn">Volver a empezar</button>
+        <p>Antes de elegir, confirma las medidas y las especificaciones con el equipo comercial.</p>
+      </div>
+      <p class="fineprint">Si la persona presenta una lesión por presión, movilidad muy limitada o necesidades clínicas específicas, consulta a un profesional de la salud para determinar la superficie adecuada.</p>
+    </section>
+
+    <footer><span>ACOLSA</span><span>Orientación de producto · Versión inicial</span></footer>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
