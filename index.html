@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Encuentra una opción de colchón hospitalario según tus necesidades.">
-  <title>Encuentra tu colchón | Acolsa</title>
+  <meta name="description" content="Encuentra modelos de colchones hospitalarios de acolsa.mx según las necesidades del paciente.">
+  <title>Encuentra tu colchón | acolsa.mx</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,68 +14,71 @@
 <body>
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="./" aria-label="Inicio Acolsa">
-        <span class="brand-mark" aria-hidden="true"><span></span></span><span>ACOLSA <small>DESCANSO Y CUIDADO</small></span>
+      <a class="brand" href="https://acolsa.mx/" aria-label="acolsa.mx, abrir sitio web" target="_blank" rel="noopener">
+        <img src="https://acolsa.mx/wp-content/uploads/2025/08/logo-acolsa-mx-negro-transparente-4x-scaled.png" alt="acolsa.mx" class="brand-logo">
       </a>
-      <span class="top-note">Asistente de selección</span>
+      <span class="top-note">Asistente de selección hospitalaria</span>
     </header>
 
     <section class="intro" id="intro">
       <p class="eyebrow"><span class="dot"></span> ORIENTACIÓN DE PRODUCTO</p>
-      <h1>Elegir un colchón<br><em>con mejor información.</em></h1>
-      <p class="intro-copy">Responde unas preguntas breves sobre el uso y las necesidades de la persona. Te orientaremos hacia opciones que vale la pena revisar.</p>
+      <h1>Encontrar el colchón<br><em>adecuado empieza aquí.</em></h1>
+      <p class="intro-copy">Responde unas preguntas sobre la movilidad, el tiempo de uso y las necesidades del paciente. Compararemos los modelos de acolsa.mx que vale la pena revisar.</p>
       <div class="intro-meta">
-        <span><span class="meta-icon">—</span> 2 minutos aprox.</span>
+        <span><span class="meta-icon">—</span> 2–3 minutos aprox.</span>
         <span><span class="meta-icon">+</span> Sin compromiso</span>
       </div>
-      <button class="primary" id="startBtn">Comenzar <span aria-hidden="true">→</span></button>
-      <p class="fineprint">Esta herramienta ofrece orientación comercial; no sustituye la valoración de un profesional de la salud.</p>
+      <button class="primary" id="startBtn">Comenzar cuestionario <span aria-hidden="true">→</span></button>
+      <p class="fineprint">Esta herramienta ofrece orientación comercial, no diagnóstico ni prescripción médica. La selección final debe confirmarse con el equipo sanitario y las fichas técnicas del producto.</p>
     </section>
 
     <section class="quiz hidden" id="quiz" aria-live="polite">
       <div class="quiz-head">
         <button class="back-btn" id="backBtn" aria-label="Volver a la pregunta anterior">← <span>Anterior</span></button>
-        <span class="step-label" id="stepLabel">PREGUNTA 1 DE 6</span>
+        <span class="step-label" id="stepLabel">PREGUNTA 1 DE 8</span>
       </div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-track" role="progressbar" aria-label="Progreso del cuestionario" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
       <div class="question-area">
-        <p class="eyebrow" id="questionCategory">CONTEXTO</p>
-        <h2 id="questionTitle">¿Para quién estás buscando un colchón?</h2>
+        <p class="eyebrow" id="questionCategory">USO DEL COLCHÓN</p>
+        <h2 id="questionTitle">¿Cuánto tiempo al día pasará el paciente sobre el colchón?</h2>
         <p class="question-help" id="questionHelp"></p>
         <div class="options" id="options"></div>
       </div>
-      <p class="quiz-foot">Tus respuestas se utilizan en esta sesión para orientar el resultado.</p>
+      <p class="quiz-foot">No se envían tus respuestas a un servidor; se usan en esta sesión para ordenar los resultados.</p>
     </section>
 
     <section class="results hidden" id="results" aria-live="polite">
-      <p class="eyebrow"><span class="dot"></span> TU ORIENTACIÓN</p>
-      <h2 id="resultTitle">Estas opciones pueden ser un buen punto de partida.</h2>
+      <p class="eyebrow"><span class="dot"></span> RESULTADOS DE ORIENTACIÓN</p>
+      <h2 id="resultTitle">Modelos para revisar</h2>
       <p class="result-copy" id="resultCopy"></p>
-      <div class="result-card">
-        <div class="product-art" aria-hidden="true">
-          <div class="mattress">
-            <div class="mattress-top"></div><div class="mattress-side"></div>
-          </div>
-          <span class="art-caption">ACOLSA · LÍNEA HOSPITALARIA</span>
-        </div>
-        <div class="product-info">
-          <span class="product-tag" id="productTag">OPCIÓN POR REVISAR</span>
-          <h3 id="productName">Colchón hospitalario</h3>
-          <p id="productDescription"></p>
-          <div class="why-title">Por qué aparece esta opción</div>
-          <ul id="reasons"></ul>
-          <p class="placeholder-note" id="placeholderNote"></p>
-          <a class="primary link-button" id="contactLink" href="https://acolsa.mx/" target="_blank" rel="noopener">Consultar con Acolsa <span>↗</span></a>
-        </div>
+      <div id="clinicalAlert" class="alert hidden" role="note"></div>
+      <div class="score-panel" id="areaPanel">
+        <div class="score-panel-heading"><span class="mini-label">PERFIL DEL PACIENTE</span><span class="mini-label">PUNTAJE ORIENTATIVO</span></div>
+        <div id="areaScores" class="area-scores"></div>
+      </div>
+      <div class="results-heading">
+        <div><p class="eyebrow">CATÁLOGO</p><h3 id="recommendationHeading">Modelos que coinciden con tus respuestas</h3></div>
+        <span class="results-count" id="resultsCount"></span>
+      </div>
+      <div id="productResults" class="product-results"></div>
+      <div class="shared-features">
+        <p class="eyebrow">CARACTERÍSTICAS DE CUBIERTA</p>
+        <h3>Protección e higiene para el uso hospitalario</h3>
+        <p>Según la información del catálogo proporcionada, los colchones se describen como antibacteriales, impermeables, fungistáticos y retardantes a la flama. En los modelos con cubierta de vinil suave al tacto sellada por ultrasonido, esa cubierta aporta dichas características. Hybrid Care, Iso Air y Opticell Jarven se distinguen por tener cierre para acceder a las celdas de aire; confirma en la ficha técnica qué construcción y especificaciones corresponden a cada cubierta.</p>
+      </div>
+      <div class="medical-notices">
+        <h3>Información importante</h3>
+        <p>Los colchones pueden ayudar a la prevención y apoyar el tratamiento de las úlceras por presión, pero no las atienden por sí solos. No sustituyen la atención médica, los cuidados del paciente ni los cambios periódicos de posición indicados por el equipo sanitario.</p>
+        <p>La clasificación de lesiones y la asociación de modelos mostrada aquí no sustituyen la valoración médica de las úlceras por presión. No utilices este cuestionario para diagnosticar una lesión ni para elegir por tu cuenta una superficie terapéutica.</p>
       </div>
       <div class="next-actions">
         <button class="secondary" id="restartBtn">Volver a empezar</button>
-        <p>Antes de elegir, confirma las medidas y las especificaciones con el equipo comercial.</p>
+        <a class="primary link-button" href="https://acolsa.mx/" target="_blank" rel="noopener">Consultar con acolsa.mx <span>↗</span></a>
       </div>
-      <p class="fineprint">Si la persona presenta una lesión por presión, movilidad muy limitada o necesidades clínicas específicas, consulta a un profesional de la salud para determinar la superficie adecuada.</p>
+      <p class="fineprint">Antes de comprar, confirma las dimensiones, el peso máximo, la compatibilidad con la cama, las condiciones de uso y la disponibilidad con acolsa.mx.</p>
     </section>
 
-    <footer><span>ACOLSA MX</span><span>ORIENTACIÓN DE PRODUCTO · PROTOTIPO</span></footer>
+    <footer><a href="https://acolsa.mx/" target="_blank" rel="noopener">acolsa.mx</a><span>ORIENTACIÓN DE PRODUCTO · CUESTIONARIO INFORMATIVO</span></footer>
   </main>
   <script src="./app.js"></script>
 </body>

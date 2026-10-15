@@ -1,52 +1,45 @@
-# Acolsa Mattress Quiz — prototipo
+# Cuestionario de colchones hospitalarios | acolsa.mx
 
-Cuestionario web inicial para orientar a visitantes hacia características de colchones hospitalarios. Está hecho con HTML, CSS y JavaScript sin framework ni dependencias.
+Prototipo estático en HTML, CSS y JavaScript para orientar a compradores hacia modelos del catálogo de acolsa.mx. La interfaz usa fondo blanco, texto negro, Montserrat con alternativas Avenir/sans-serif y recursos de imagen proporcionados por el usuario.
 
 ## Archivos
 
-- `index.html`: estructura y contenido de la página.
-- `styles.css`: apariencia adaptable a móviles y escritorio.
-- `app.js`: preguntas, navegación y lógica de resultado.
+- `index.html`: estructura, contenido de marca y advertencias.
+- `styles.css`: diseño adaptable a escritorio y móvil.
+- `app.js`: preguntas, catálogo, filtros de compatibilidad y puntuación.
 
-## Probar en tu computadora
+## Probar localmente
 
-La forma más sencilla es abrir `index.html` en un navegador. Para una experiencia de desarrollo más fiable, usa una extensión de servidor local en tu editor (por ejemplo, Live Server en VS Code).
+Abre `index.html` en un navegador o sirve la carpeta con una extensión como Live Server en VS Code.
 
 ## Publicar con GitHub + Vercel
 
-1. Crea un repositorio nuevo en GitHub.
-2. Sube los tres archivos (`index.html`, `styles.css`, `app.js`) y este `README.md` a la raíz del repositorio.
-3. En Vercel, elige **Add New → Project** e importa el repositorio de GitHub.
-4. Como es una web estática, no necesitas instalar dependencias ni configurar un comando de build. Deja los ajustes por defecto si Vercel detecta correctamente el proyecto.
-5. Pulsa **Deploy**. Vercel te dará una URL de prueba.
-6. Cada vez que actualices y guardes cambios en GitHub, Vercel podrá desplegar la nueva versión automáticamente.
+1. Sustituye los archivos anteriores en la raíz del repositorio por los de esta carpeta.
+2. Haz commit y push a GitHub.
+3. Vercel volverá a desplegar el sitio si el repositorio está conectado. Es una web estática: no requiere instalación de dependencias ni comando de build.
 
-Documentación oficial: https://vercel.com/docs/git
+## Lógica del cuestionario
+
+- Las respuestas dan un punto base a los modelos; las coincidencias reciben puntos adicionales. Las reglas especiales de cuidador, movilidad, peso y niveles 3/4 de úlceras otorgan una ponderación mayor.
+- La pregunta de presupuesto solo otorga puntos a los modelos asociados al rango elegido. El presupuesto no elimina por sí solo las demás alternativas.
+- La capacidad máxima de peso funciona como filtro de compatibilidad cuando se conoce el peso. En rangos, el prototipo usa el extremo superior como criterio conservador.
+- Se muestran hasta cinco modelos con puntaje positivo, ordenados de mayor a menor puntuación.
+- Cada tarjeta enlaza a la página del producto y a contacto para solicitar una cotización por volumen.
+- La selección de un nivel de úlcera influye en la puntuación según la asociación de catálogo proporcionada, pero no constituye recomendación clínica ni confirma idoneidad médica.
+- Si no se encuentra una opción compatible, el resultado invita a contactar a acolsa.mx por la página de contacto, al 55 7638 4584 o a ventas@acolsa.mx.
+- No se envían las respuestas a un servidor.
 
 ## Antes de publicar para clientes
 
-Este proyecto es un prototipo. No recomienda todavía un modelo real del catálogo. Antes de usarlo comercialmente:
+Verifica con el equipo de producto y profesionales sanitarios todas las especificaciones, afirmaciones y reglas. En particular:
 
-- Sustituye la lógica de ejemplo por reglas revisadas con el equipo de producto/ventas.
-- Añade nombres, imágenes, fichas técnicas y enlaces reales de modelos compatibles.
-- Verifica cada afirmación de producto (impermeabilidad, compatibilidad con camas articuladas, limpieza, límites de carga, etc.).
-- Haz pruebas en móviles y con teclado/lector de pantalla.
-- Si añades formularios para recoger datos personales, define la finalidad, el consentimiento y el tratamiento de esos datos.
-- No lo presentes como herramienta de diagnóstico ni de prescripción clínica.
+- Confirma capacidades máximas de peso, precios, garantías, vida útil, compatibilidad con bases y requisitos de instalación.
+- Revisa que las imágenes remotas sigan disponibles y que el uso comercial esté permitido.
+- Confirma los enlaces de tienda y los rangos de presupuesto asociados a cada producto antes de publicar.
+- Valida la lógica de puntuación con el equipo comercial y sanitario. Las asociaciones de producto por nivel de úlcera son las proporcionadas para el prototipo y no deben presentarse como indicación clínica universal.
+- Los colchones no sustituyen la atención médica, la valoración de úlceras por presión ni los cambios de posición y cuidados indicados por el equipo sanitario.
+- No presentes esta web como instrumento de diagnóstico o prescripción.
 
-## Personalizar preguntas y resultados
+## Recursos de marca y catálogo
 
-Edita el arreglo `questions` al inicio de `app.js`. Las reglas que generan el resultado están en la función `showResult()`. Mantén las preguntas y las reglas del catálogo separadas al crecer el proyecto, para que el mantenimiento sea más sencillo.
-
-## Inspiración de estructura
-
-La experiencia toma como referencia general los cuestionarios interactivos de selección guiada, incluido https://who-is-your-ideal-killer.vercel.app/. El código de este proyecto es nuevo y no depende del código fuente de ese sitio.
-
-
-## Diseño visual actualizado
-
-Fondo blanco, tipografía negra, Montserrat y elementos geométricos lineales. Montserrat se carga desde Google Fonts; si no hay conexión, el navegador usa una alternativa sans-serif.
-
-## Importante antes de publicarlo
-
-Las reglas de recomendación y el ejemplo de producto siguen siendo provisionales. Antes de usarlo con clientes, comparte las fichas técnicas de los colchones hospitalarios (modelos, materiales, medidas, cubierta, uso previsto, compatibilidades y limitaciones). Con esa información podremos vincular las respuestas con productos reales y revisar cuidadosamente las preguntas relacionadas con necesidades clínicas. No debe presentarse como herramienta de diagnóstico ni como sustituto de una valoración profesional.
+Los logos y las imágenes de producto se cargan desde las URLs de `acolsa.mx` proporcionadas por el usuario. Si una URL cambia, actualiza el campo `image` del modelo correspondiente en `app.js`. El logo blanco se conserva referenciado en `ASSETS.logoWhite` para posibles secciones oscuras futuras; la interfaz actual utiliza fondo blanco y el logo negro.

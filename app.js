@@ -1,114 +1,209 @@
 /*
- * Acolsa Mattress Quiz — starter prototype
- * Product rules and example products are placeholders. Replace them with
- * verified catalog specifications before publishing for customers.
+ * Cuestionario de orientación de colchones hospitalarios de acolsa.mx.
+ * La puntuación es comercial e informativa; no es un instrumento clínico.
  */
+const ASSETS = {
+  logoBlack: "https://acolsa.mx/wp-content/uploads/2025/08/logo-acolsa-mx-negro-transparente-4x-scaled.png",
+  logoWhite: "https://acolsa.mx/wp-content/uploads/2025/07/logo-blanco-de-acolsa-mx-4x-scaled.png"
+};
+
+const products = [
+  {
+    id: "d20", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/colchon-hospitalario-de-multiples-posiciones-d20/", name: "D20 múltiples posiciones", short: "D20", image: "https://acolsa.mx/wp-content/uploads/2022/01/icono-d20.png",
+    description: "Colchón de una sola base de espuma con cortes inferiores para adaptarse a camas de posiciones. Es la opción más económica del catálogo.",
+    area: "ambulatory", type: "static", maxWeight: 120, warranty: "6 meses", lifespan: "2 años", priceLabel: "Menos de $5,000 MXN", priceMin: 0, priceMax: 5000,
+    ulcerLevels: [1], features: ["Espuma de una sola base", "Cortes inferiores para camas articuladas"],
+    priceNote: "Precio orientativo según el rango proporcionado; confirmar cotización."
+  },
+  {
+    id: "kubuflex27", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/colchon-kubuflex-27/", name: "Kubuflex 27", short: "Kubuflex 27", image: "https://acolsa.mx/wp-content/uploads/2020/06/icono-kubuflex-27.png",
+    description: "Un paso arriba del D20, con espuma ligeramente más densa y cortes cúbicos en la superficie para ayudar a distribuir el peso y la presión.",
+    area: "ambulatory", type: "static", maxWeight: 120, warranty: "6 meses", lifespan: "2 años", priceLabel: "Menos de $5,000 MXN", priceMin: 0, priceMax: 5000,
+    ulcerLevels: [1], features: ["Espuma de mayor densidad que D20", "Cortes cúbicos superiores"],
+    priceNote: "Precio orientativo según el rango proporcionado; confirmar cotización."
+  },
+  {
+    id: "kubuflexZone", productUrl: "https://acolsa.mx/tienda/colchones-antiescaras/kubuflex-zone/", name: "Kubuflex Zone", short: "Kubuflex Zone", image: "https://acolsa.mx/wp-content/uploads/2019/05/icono-kubuflex-zone.png",
+    description: "Espuma de mayor densidad y cortes específicos diseñados para crear cinco zonas de confort 3D.",
+    area: "ambulatory", type: "static", maxWeight: 130, warranty: "1 año", lifespan: "3 años", priceLabel: "$5,000–$7,000 MXN", priceMin: 5000, priceMax: 7000,
+    ulcerLevels: [1], features: ["Cinco zonas de confort 3D", "Cortes especializados"],
+    priceNote: "Precio orientativo según el rango proporcionado; confirmar cotización."
+  },
+  {
+    id: "isoFresh", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/colchon-antiescaras-iso-fresh/", name: "Iso Fresh", short: "Iso Fresh", image: "https://acolsa.mx/wp-content/uploads/2020/05/icono-iso-fresh.png",
+    description: "Sistema de varias capas con espuma Viscool para favorecer la ventilación y la disipación del calor, más una capa superior con cortes cúbicos para ayudar a distribuir el peso.",
+    area: "recovery", type: "static", maxWeight: 220, warranty: "1 año", lifespan: "3 años", priceLabel: "$5,000–$7,000 MXN", priceMin: 5000, priceMax: 7000,
+    ulcerLevels: [2], features: ["Capas de espuma", "Viscool para ventilación y disipación del calor"],
+    priceNote: "Precio orientativo según el rango proporcionado; confirmar cotización."
+  },
+  {
+    id: "isoCloud", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/colchon-antiescaras-isocloud/", name: "Iso Cloud", short: "Iso Cloud", image: "https://acolsa.mx/wp-content/uploads/2020/05/Colchon-hospitalarios-antiescaras-Isocloud-001p.jpg",
+    imageAlt: "Colchón hospitalario Iso Cloud de acolsa.mx", imageFit: "contain",
+    description: "Tres capas: una superior con extracto de neroli, una capa Viscool con tecnología termorreguladora y una base densa y resistente con cortes para adaptarse a camas de posiciones.",
+    area: "recovery", type: "static", maxWeight: 230, warranty: "2 años", lifespan: "5 años", priceLabel: "$7,000–$10,000 MXN", priceMin: 7000, priceMax: 10000,
+    ulcerLevels: [3], features: ["Tres capas de espuma", "Capa Viscool termorreguladora", "Base con cortes para camas articuladas"],
+    priceNote: "Precio orientativo según el rango proporcionado; confirmar cotización."
+  },
+  {
+    id: "cooperFlex", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/colchon-hospitalario-cooper-flex/", name: "Cooper Flex", short: "Cooper Flex", image: "https://acolsa.mx/wp-content/uploads/2023/01/icono-cooper-flex.png",
+    description: "Tres capas: Viscopper con micropartículas de materiales biosaludables, Neropur con esencia de neroli y una base Resilen de soporte. También cuenta con cortes cúbicos.",
+    area: "recovery", type: "static", maxWeight: 230, warranty: "2 años", lifespan: "5 años", priceLabel: "$10,000–$15,000 MXN", priceMin: 10000, priceMax: 15000,
+    ulcerLevels: [3], features: ["Tres capas especializadas", "Base Resilen", "Cortes cúbicos"],
+    priceNote: "Precio orientativo según el rango proporcionado; confirmar cotización."
+  },
+  {
+    id: "isoGel", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/colchon-hospitalario-iso-gel/", name: "Iso Gel", short: "Iso Gel", image: "https://acolsa.mx/wp-content/uploads/2024/02/icono-iso-gel.png",
+    description: "Tres capas con un panel superior de gel TPE en forma de panal, diseñado para mejorar la distribución del peso y el calor. Su construcción es más pesada.",
+    area: "intensive", type: "static", maxWeight: 120, warranty: "3 años", lifespan: "6 años", priceLabel: "$10,000–$15,000 MXN", priceMin: 10000, priceMax: 15000,
+    ulcerLevels: [3], features: ["Panel superior de gel TPE en panal", "Mayor peso del producto"],
+    priceNote: "Precio orientativo según el rango proporcionado; confirmar cotización."
+  },
+  {
+    id: "hybridCare", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/colchon-hospitalario-hybrid-care/", name: "Hybrid Care", short: "Hybrid Care", image: "https://acolsa.mx/wp-content/uploads/2023/01/icono-hybrid-care.png",
+    description: "Colchón híbrido que combina una cámara de aire interna con dos capas superiores de espuma para comodidad y distribución del peso.",
+    area: "intensive", type: "hybrid", maxWeight: 120, warranty: "6 meses", lifespan: "1 año", priceLabel: "$10,000–$15,000 MXN", priceMin: 10000, priceMax: 15000,
+    ulcerLevels: [3], features: ["Espuma y cámara de aire", "Sistema con cierre para acceder a las celdas de aire"], zipper: true,
+    priceNote: "Precio orientativo según el rango proporcionado; confirmar cotización."
+  },
+  {
+    id: "isoAir", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/colchon-hospitalario-iso-air/", name: "Iso Air", short: "Iso Air", image: "https://acolsa.mx/wp-content/uploads/2024/04/dsc01926-scaled.jpg",
+    description: "Colchón dinámico compuesto por cámaras de aire. Es una opción de precio elevado dentro del catálogo y requiere una superficie estable compatible.",
+    area: "intensive", type: "air", maxWeight: 120, warranty: "6 meses", lifespan: "1 año", priceLabel: "Desde $20,000 MXN", priceMin: 20000, priceMax: Infinity,
+    ulcerLevels: [3], features: ["Cámaras de aire", "Diseñado para superficies estables", "Cierre para acceder a las celdas de aire"], zipper: true,
+    priceNote: "Precio de entrada orientativo; confirmar cotización."
+  },
+  {
+    id: "opticellJarven", productUrl: "https://acolsa.mx/tienda/salud-y-hospitales/jarven-opticell/", name: "Opticell Jarven", short: "Opticell Jarven", image: "https://acolsa.mx/wp-content/uploads/2024/04/opticell-jarven-4-rojo-cuadrado.png",
+    description: "Sistema dinámico de un fabricante externo distribuido por acolsa.mx, descrito en el catálogo como una solución de alta tecnología para la distribución del peso y la presión.",
+    area: "intensive", type: "air", maxWeight: 230, warranty: "5 años", lifespan: "5 años", priceLabel: "Desde $50,000 MXN", priceMin: 50000, priceMax: Infinity,
+    ulcerLevels: [4], features: ["Sistema dinámico de aire", "Requiere una superficie estable compatible", "Cierre para acceder a las celdas de aire"], zipper: true,
+    priceNote: "Precio de entrada orientativo; confirmar cotización."
+  }
+];
+
+const areas = {
+  ambulatory: { name: "Ambulatorio", short: "Ambulatorio", description: "Estancias cortas y pacientes con movilidad propia", products: ["d20", "kubuflex27", "kubuflexZone"] },
+  recovery: { name: "Unidad de recuperación", short: "Recuperación", description: "Estancias medias y pacientes que necesitan ayuda para moverse", products: ["isoFresh", "isoCloud", "cooperFlex"] },
+  intensive: { name: "Terapia / cuidados intensivos", short: "Terapia / UCI", description: "Estancias prolongadas y movilidad muy reducida", products: ["isoGel", "hybridCare", "isoAir", "opticellJarven"] }
+};
+
 const questions = [
   {
-    category: "CONTEXTO",
-    title: "¿Para quién estás buscando un colchón?",
-    help: "Esto nos ayuda a adaptar la orientación a tu situación.",
+    key: "dailyUse", category: "TIEMPO DE USO", title: "¿Cuánto tiempo al día pasará el paciente sobre el colchón?",
+    help: "Piensa en el uso habitual, no solo en el tiempo que permanecerá hospitalizado.",
     answers: [
-      { value: "home_caregiver", symbol: "⌂", label: "Un familiar que recibe cuidados en casa", desc: "Busco una opción para apoyar sus cuidados diarios." },
-      { value: "institution", symbol: "＋", label: "Una persona en mi institución", desc: "Hospital, clínica, residencia u otro centro." },
-      { value: "self", symbol: "♡", label: "Para mí o para otra persona en casa", desc: "Busco una opción para uso personal o doméstico." }
+      { value: "fewHours", symbol: "◷", label: "Solo algunas horas al día", desc: "El paciente pasa buena parte del día fuera de la cama.", area: "ambulatory" },
+      { value: "mostDay", symbol: "◴", label: "Las noches y la mayor parte del día", desc: "Se levanta para algunas actividades.", area: "recovery" },
+      { value: "allDay", symbol: "◉", label: "Prácticamente todo el día y la noche", desc: "Permanece en cama casi todo el tiempo.", area: "intensive" }
     ]
   },
   {
-    category: "TIPO DE CAMA",
-    title: "¿En qué tipo de cama se utilizará?",
-    help: "La compatibilidad y las medidas deben confirmarse antes de elegir.",
+    key: "duration", category: "DURACIÓN PREVISTA", title: "¿Durante cuánto tiempo se espera utilizar el colchón?",
+    help: "Esto ayuda a contextualizar la vida útil promedio y la garantía de cada modelo.",
     answers: [
-      { value: "adjustable", symbol: "↕", label: "Cama hospitalaria articulada", desc: "El respaldo o las piernas pueden elevarse." },
-      { value: "manual", symbol: "↗", label: "Cama hospitalaria manual", desc: "Se ajusta mediante mecanismos manuales." },
-      { value: "fixed", symbol: "□", label: "Cama fija o base convencional", desc: "No cambia de posición." },
-      { value: "unknown", symbol: "?", label: "No estoy seguro", desc: "Necesito comprobarlo." }
+      { value: "weeks", symbol: "1", label: "Unas semanas", desc: "Uso previsto de corta duración.", area: "ambulatory" },
+      { value: "months", symbol: "2", label: "Varios meses", desc: "Uso previsto de duración media.", area: "recovery" },
+      { value: "years", symbol: "3", label: "Entre uno y tres años", desc: "Uso prolongado.", area: "intensive" },
+      { value: "indefinite", symbol: "∞", label: "Más de tres años o por tiempo indefinido", desc: "Se busca una solución para uso a largo plazo.", area: "intensive" }
     ]
   },
   {
-    category: "PRIORIDAD",
-    title: "¿Qué es lo más importante para ti?",
-    help: "Elige la necesidad principal; más adelante podrás consultar otras características.",
+    key: "bed", category: "TIPO DE CAMA", title: "¿Sobre qué tipo de cama se utilizará el colchón?",
+    help: "La compatibilidad exacta debe confirmarse antes de comprar. Los sistemas dinámicos de aire requieren una superficie estable compatible.",
     answers: [
-      { value: "comfort", symbol: "☼", label: "Comodidad y soporte para el descanso" },
-      { value: "pressure", symbol: "＋", label: "Una necesidad relacionada con la presión corporal", desc: "Puede requerir valoración de un profesional de la salud." },
-      { value: "hygiene", symbol: "◇", label: "Limpieza sencilla y cubierta impermeable" },
-      { value: "durability", symbol: "▤", label: "Resistencia para uso frecuente o institucional" },
-      { value: "unsure", symbol: "?", label: "No sé qué característica priorizar" }
+      { value: "hospitalAdjustable", symbol: "↕", label: "Cama hospitalaria de posiciones", desc: "Con articulación eléctrica o manual." },
+      { value: "homeAdjustable", symbol: "↗", label: "Cama residencial de posiciones", desc: "Una base que eleva respaldo o piernas." },
+      { value: "stable", symbol: "□", label: "Base plana y estable", desc: "No articula ni cambia de posición." },
+      { value: "unknown", symbol: "?", label: "Todavía no lo sé", desc: "Necesito confirmar la base disponible." }
     ]
   },
   {
-    category: "MOVILIDAD",
-    title: "¿Cómo se mueve la persona que utilizará el colchón?",
-    help: "Esta respuesta ayuda a identificar cuándo conviene recibir orientación adicional.",
+    key: "caregiver", category: "APOYO PARA MOVILIZAR", title: "¿El paciente cuenta con un cuidador que le ayude a cambiar de posición?",
+    help: "Los colchones no reemplazan la movilización ni la atención regular del paciente.",
     answers: [
-      { value: "independent", symbol: "→", label: "Puede cambiar de posición por sí misma" },
-      { value: "assisted", symbol: "↔", label: "Necesita ayuda para cambiar de posición" },
-      { value: "limited", symbol: "＋", label: "Permanece en cama durante periodos prolongados", desc: "Si hay necesidades clínicas, consulta a un profesional." },
+      { value: "frequent", symbol: "✓", label: "Sí, recibe ayuda frecuente", desc: "Hay apoyo para los cambios de posición." },
+      { value: "limited", symbol: "↔", label: "Sí, pero la ayuda es limitada", desc: "No siempre hay alguien disponible." },
+      { value: "none", symbol: "!", label: "No cuenta con ayuda regular", desc: "Conviene planear apoyo de cuidado; el colchón no sustituye esa atención." },
       { value: "unknown", symbol: "?", label: "No estoy seguro" }
     ]
   },
   {
-    category: "LIMPIEZA",
-    title: "¿Qué requisitos de limpieza necesita?",
-    help: "Las características concretas de la cubierta deben verificarse en la ficha técnica.",
+    key: "mobility", category: "MOVILIDAD", title: "¿Qué tanta movilidad tiene el paciente por sí mismo?",
+    help: "Esta respuesta, junto con la duración y el tiempo diario de uso, suma puntos al perfil de área hospitalaria.",
     answers: [
-      { value: "waterproof", symbol: "◇", label: "Cubierta impermeable y fácil de limpiar" },
-      { value: "special", symbol: "≋", label: "Requisitos específicos de lavado o desinfección" },
-      { value: "standard", symbol: "✓", label: "Uso general, sin requisitos especiales" },
-      { value: "unknown", symbol: "?", label: "Necesito orientación" }
+      { value: "independent", symbol: "→", label: "Mucha: puede cambiar de posición sin ayuda", area: "ambulatory" },
+      { value: "limited", symbol: "↔", label: "Limitada: necesita ayuda para algunos movimientos", area: "recovery" },
+      { value: "minimal", symbol: "＋", label: "Muy poca o nula: depende de sus cuidadores", area: "intensive" }
     ]
   },
   {
-    category: "SIGUIENTE PASO",
-    title: "¿Qué te gustaría hacer después?",
-    help: "El resultado puede orientarte hacia un producto o hacia una conversación con nuestro equipo.",
+    key: "weight", category: "PESO DEL PACIENTE", title: "¿Cuánto pesa el paciente?",
+    help: "Usaremos este dato como filtro de compatibilidad según la capacidad máxima indicada para cada modelo.",
     answers: [
-      { value: "model", symbol: "▣", label: "Revisar el modelo que podría encajar" },
-      { value: "quote", symbol: "$", label: "Solicitar precios o una cotización" },
-      { value: "advice", symbol: "↗", label: "Hablar con alguien antes de decidir" }
+      { value: "under120", symbol: "<", label: "Menos de 120 kg" },
+      { value: "120to129", symbol: "↗", label: "De 120 a 129 kg" },
+      { value: "130to219", symbol: "↗", label: "De 130 a 219 kg" },
+      { value: "220to229", symbol: "↗", label: "De 220 a 229 kg" },
+      { value: "230exact", symbol: "230", label: "230 kg exactos" },
+      { value: "over230", symbol: ">", label: "Más de 230 kg" },
+      { value: "unknown", symbol: "?", label: "No conozco el peso exacto" }
+    ]
+  },
+  {
+    key: "ulcers", category: "ÚLCERAS POR PRESIÓN", title: "¿El paciente tiene úlceras por presión diagnosticadas?",
+    help: "Selecciona el nivel únicamente si fue identificado por un profesional sanitario. Si no lo sabes, elige la última opción.",
+    answers: [
+      { value: "none", symbol: "✓", label: "No presenta lesiones conocidas" },
+      { value: "level1", symbol: "1", label: "Nivel 1 diagnosticado", desc: "Enrojecimiento persistente; la clasificación debe confirmarla un profesional." },
+      { value: "level2", symbol: "2", label: "Nivel 2 diagnosticado", desc: "Lesión superficial diagnosticada por un profesional." },
+      { value: "level3", symbol: "3", label: "Nivel 3 diagnosticado", desc: "Lesión profunda; requiere valoración y manejo sanitario." },
+      { value: "level4", symbol: "4", label: "Nivel 4 diagnosticado", desc: "Lesión muy profunda; requiere atención clínica especializada." },
+      { value: "unknown", symbol: "?", label: "No sé si tiene una lesión o cuál es su nivel", desc: "No intentes clasificar la lesión por tu cuenta." }
+    ]
+  },
+  {
+    key: "budget", category: "PRESUPUESTO", title: "¿Cuál es tu presupuesto máximo aproximado por colchón?",
+    help: "Se muestran rangos orientativos a partir de la información proporcionada. Los precios finales y la cotización deben confirmarse con acolsa.mx.",
+    answers: [
+      { value: "under5000", symbol: "$", label: "Menos de $5,000 MXN" },
+      { value: "5000to7000", symbol: "$", label: "De $5,000 a $7,000 MXN" },
+      { value: "7000to10000", symbol: "$", label: "De $7,000 a $10,000 MXN" },
+      { value: "10000to15000", symbol: "$", label: "De $10,000 a $15,000 MXN" },
+      { value: "15000to20000", symbol: "$", label: "De $15,000 a $20,000 MXN" },
+      { value: "20000to50000", symbol: "$", label: "De $20,000 a menos de $50,000 MXN" },
+      { value: "50000plus", symbol: "$", label: "$50,000 MXN o más" },
+      { value: "flexible", symbol: "↗", label: "Puedo considerar otras opciones si las necesidades lo justifican" }
     ]
   }
 ];
 
 const state = { index: 0, answers: {} };
-const intro = document.querySelector("#intro");
-const quiz = document.querySelector("#quiz");
-const results = document.querySelector("#results");
-const startBtn = document.querySelector("#startBtn");
-const backBtn = document.querySelector("#backBtn");
-const restartBtn = document.querySelector("#restartBtn");
-const stepLabel = document.querySelector("#stepLabel");
-const progressFill = document.querySelector("#progressFill");
-const questionCategory = document.querySelector("#questionCategory");
-const questionTitle = document.querySelector("#questionTitle");
-const questionHelp = document.querySelector("#questionHelp");
-const options = document.querySelector("#options");
+const $ = (selector) => document.querySelector(selector);
+const intro = $("#intro"), quiz = $("#quiz"), results = $("#results");
+const startBtn = $("#startBtn"), backBtn = $("#backBtn"), restartBtn = $("#restartBtn");
+const stepLabel = $("#stepLabel"), progressFill = $("#progressFill"), progressTrack = $(".progress-track");
+const questionCategory = $("#questionCategory"), questionTitle = $("#questionTitle"), questionHelp = $("#questionHelp"), options = $("#options");
 
 startBtn.addEventListener("click", () => {
-  intro.classList.add("hidden");
-  results.classList.add("hidden");
-  quiz.classList.remove("hidden");
+  intro.classList.add("hidden"); results.classList.add("hidden"); quiz.classList.remove("hidden");
+  state.index = 0;
   renderQuestion();
 });
 backBtn.addEventListener("click", () => {
-  if (state.index > 0) {
-    state.index--;
-    renderQuestion();
-  }
+  if (state.index > 0) { state.index--; renderQuestion(); }
 });
 restartBtn.addEventListener("click", () => {
-  state.index = 0;
-  state.answers = {};
-  results.classList.add("hidden");
-  intro.classList.remove("hidden");
+  state.index = 0; state.answers = {};
+  results.classList.add("hidden"); quiz.classList.add("hidden"); intro.classList.remove("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 function renderQuestion() {
   const q = questions[state.index];
   stepLabel.textContent = `PREGUNTA ${state.index + 1} DE ${questions.length}`;
-  progressFill.style.width = `${((state.index + 1) / questions.length) * 100}%`;
+  const percent = (state.index / questions.length) * 100;
+  progressFill.style.width = `${percent}%`;
+  progressTrack.setAttribute("aria-valuenow", String(Math.round(percent)));
   questionCategory.textContent = q.category;
   questionTitle.textContent = q.title;
   questionHelp.textContent = q.help || "";
@@ -118,89 +213,244 @@ function renderQuestion() {
   q.answers.forEach((answer) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "option";
-    button.innerHTML = `
-      <span class="option-symbol" aria-hidden="true">${escapeHtml(answer.symbol)}</span>
-      <span class="option-text">${escapeHtml(answer.label)}${answer.desc ? `<span class="option-desc">${escapeHtml(answer.desc)}</span>` : ""}</span>
-      <span class="option-arrow" aria-hidden="true">→</span>`;
+    button.className = `option${state.answers[q.key] === answer.value ? " selected" : ""}`;
+    button.setAttribute("aria-pressed", String(state.answers[q.key] === answer.value));
+    const symbol = document.createElement("span"); symbol.className = "option-symbol"; symbol.setAttribute("aria-hidden", "true"); symbol.textContent = answer.symbol;
+    const text = document.createElement("span"); text.className = "option-text"; text.append(document.createTextNode(answer.label));
+    if (answer.desc) { const desc = document.createElement("span"); desc.className = "option-desc"; desc.textContent = answer.desc; text.append(desc); }
+    const arrow = document.createElement("span"); arrow.className = "option-arrow"; arrow.setAttribute("aria-hidden", "true"); arrow.textContent = "→";
+    button.append(symbol, text, arrow);
     button.addEventListener("click", () => {
-      state.answers[q.category] = answer.value;
-      if (state.index < questions.length - 1) {
-        state.index++;
-        renderQuestion();
-      } else {
-        showResult();
-      }
+      state.answers[q.key] = answer.value;
+      if (state.index < questions.length - 1) { state.index++; renderQuestion(); }
+      else { progressFill.style.width = "100%"; progressTrack.setAttribute("aria-valuenow", "100"); showResults(); }
     });
-    options.appendChild(button);
+    options.append(button);
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function showResult() {
-  quiz.classList.add("hidden");
-  results.classList.remove("hidden");
+function weightLimit(answer) {
+  // Para los rangos se utiliza el extremo superior como umbral conservador.
+  return ({ under120: 119.99, "120to129": 129, "130to219": 219, "220to229": 229, "230exact": 230, over230: 231, unknown: null })[answer] ?? null;
+}
+function budgetLimit(answer) {
+  return ({ under5000: 4999, "5000to7000": 7000, "7000to10000": 10000, "10000to15000": 15000, "15000to20000": 20000, "20000to50000": 49999, "50000plus": Infinity, flexible: Infinity })[answer] ?? Infinity;
+}
+function areaScores(answers) {
+  const scores = { ambulatory: 0, recovery: 0, intensive: 0 };
+  ["dailyUse", "duration", "mobility"].forEach((key) => {
+    const question = questions.find((q) => q.key === key);
+    const answer = question.answers.find((item) => item.value === answers[key]);
+    if (answer && answer.area) scores[answer.area] += 1;
+  });
+  return scores;
+}
+function areaForScore(scores) {
+  return Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+}
+function ulcerLevel(answer) {
+  return ({ level1: 1, level2: 2, level3: 3, level4: 4 })[answer] || null;
+}
+function productMatchesBudget(product, answer) {
+  if (answer === "flexible") return true;
+  const groups = {
+    under5000: ["d20", "kubuflex27"],
+    "5000to7000": ["kubuflexZone", "isoFresh"],
+    "7000to10000": ["isoCloud"],
+    "10000to15000": ["cooperFlex", "isoGel", "hybridCare"],
+    "15000to20000": [],
+    "20000to50000": ["isoAir"],
+    "50000plus": ["opticellJarven"]
+  };
+  return (groups[answer] || []).includes(product.id);
+}
+function productMatchesBed(product, answer) {
+  if (answer === "hospitalAdjustable" || answer === "homeAdjustable") return product.type === "static";
+  if (answer === "stable") return product.type === "air" || product.type === "hybrid";
+  return false;
+}
+function productMatchesWeight(product, answer) {
+  if (answer === "unknown") return false;
+  const threshold = weightLimit(answer);
+  if (threshold === null) return false;
+  // Para respuestas por rango, solo se considera coincidencia si la capacidad cubre todo el rango.
+  return product.maxWeight >= threshold;
+}
+function scoreProduct(product, answers, areaProfileScores) {
+  let score = 0;
+  const addAnswerPoints = (matches, special = false, baseline = true) => {
+    if (baseline) score += 1;
+    if (matches) score += special ? 3 : 2;
+  };
 
-  const a = state.answers;
-  const clinicalFollowup = a["PRIORIDAD"] === "pressure" ||
-    a["MOVILIDAD"] === "limited" || a["MOVILIDAD"] === "assisted";
-  const institutional = a["CONTEXTO"] === "institution";
-  const hygiene = a["LIMPIEZA"] === "waterproof" || a["LIMPIEZA"] === "special";
-  const adjustable = a["TIPO DE CAMA"] === "adjustable" || a["TIPO DE CAMA"] === "manual";
+  // Pregunta 1: tiempo diario de uso.
+  const daily = questions.find((q) => q.key === "dailyUse").answers.find((a) => a.value === answers.dailyUse);
+  addAnswerPoints(Boolean(daily && daily.area === product.area));
 
-  const resultTitle = document.querySelector("#resultTitle");
-  const resultCopy = document.querySelector("#resultCopy");
-  const productTag = document.querySelector("#productTag");
-  const productName = document.querySelector("#productName");
-  const productDescription = document.querySelector("#productDescription");
-  const reasons = document.querySelector("#reasons");
-  const placeholderNote = document.querySelector("#placeholderNote");
-  const contactLink = document.querySelector("#contactLink");
+  // Pregunta 2: duración prevista.
+  const duration = questions.find((q) => q.key === "duration").answers.find((a) => a.value === answers.duration);
+  addAnswerPoints(Boolean(duration && duration.area === product.area));
 
-  if (clinicalFollowup) {
-    resultTitle.textContent = "El siguiente paso más útil es recibir orientación especializada.";
-    resultCopy.textContent = "Tus respuestas indican que podría haber necesidades que no conviene resolver únicamente con un cuestionario comercial. Un profesional de la salud puede valorar qué tipo de superficie resulta apropiada.";
-    productTag.textContent = "ASESORÍA RECOMENDADA";
-    productName.textContent = "Revisar las necesidades antes de elegir";
-    productDescription.textContent = "No asignamos automáticamente un colchón terapéutico a partir de estas respuestas.";
-    setReasons(reasons, [
-      "La movilidad y las necesidades relacionadas con la presión pueden requerir una valoración individual.",
-      "Conviene confirmar las especificaciones clínicas y técnicas antes de elegir un producto."
-    ]);
+  // Pregunta 3: base. En camas articuladas se favorecen los estáticos; en base estable, los sistemas de aire.
+  addAnswerPoints(productMatchesBed(product, answers.bed));
+
+  // Pregunta 4: cuidador. Sin ayuda regular, los híbridos/dinámicos reciben el puntaje especial.
+  const caregiverSpecial = answers.caregiver === "none" && (product.type === "air" || product.type === "hybrid");
+  const caregiverMatch = answers.caregiver === "none"
+    ? caregiverSpecial
+    : (answers.caregiver === "frequent" || answers.caregiver === "limited") && product.type === "static";
+  addAnswerPoints(caregiverMatch, caregiverSpecial);
+
+  // Pregunta 5: movilidad propia.
+  const mobility = questions.find((q) => q.key === "mobility").answers.find((a) => a.value === answers.mobility);
+  const mobilitySpecial = answers.mobility === "minimal" && product.area === "intensive";
+  addAnswerPoints(Boolean(mobility && mobility.area === product.area), mobilitySpecial);
+
+  // Pregunta 6: peso. El peso máximo también se usa como filtro de compatibilidad en los resultados.
+  const weightMatch = productMatchesWeight(product, answers.weight);
+  const weightSpecial = !["under120", "unknown"].includes(answers.weight) && weightMatch;
+  addAnswerPoints(weightMatch || answers.weight === "under120", weightSpecial);
+
+  // Pregunta 7: nivel diagnosticado. Niveles 3 y 4 otorgan puntaje especial a los modelos asociados en el catálogo.
+  const level = ulcerLevel(answers.ulcers);
+  const ulcerMatch = level ? product.ulcerLevels.includes(level) : answers.ulcers === "none";
+  const ulcerSpecial = (answers.ulcers === "level3" || answers.ulcers === "level4") && ulcerMatch;
+  addAnswerPoints(ulcerMatch, ulcerSpecial);
+
+  // Pregunta 8: excepción solicitada: solo los modelos del rango seleccionado reciben puntos de presupuesto.
+  if (productMatchesBudget(product, answers.budget)) score += 3;
+
+  // Preferencias secundarias: vida útil y área con mayor puntuación, con peso menor que los criterios principales.
+  const areaOrder = areaForScore(areaProfileScores);
+  if (product.area === areaOrder[0]) score += 1;
+  if (answers.duration === "indefinite" && product.lifespan === "6 años") score += 1;
+  if (answers.duration === "indefinite" && product.lifespan === "5 años") score += 0.5;
+  return score;
+}
+function getBudgetDisplay(answers) {
+  const limit = budgetLimit(answers.budget);
+  return { limit, flexible: answers.budget === "flexible" };
+}
+
+function showResults() {
+  quiz.classList.add("hidden"); results.classList.remove("hidden");
+  const answers = state.answers;
+  const scores = areaScores(answers);
+  const areaOrder = areaForScore(scores);
+  const winningArea = areas[areaOrder[0]];
+  const cap = weightLimit(answers.weight);
+  const budget = getBudgetDisplay(answers);
+  const level = ulcerLevel(answers.ulcers);
+  const ulcerKnown = Boolean(level);
+
+  const resultTitle = $("#resultTitle"), resultCopy = $("#resultCopy"), clinicalAlert = $("#clinicalAlert");
+  const areaScoresEl = $("#areaScores"), productResults = $("#productResults");
+  const recommendationHeading = $("#recommendationHeading"), resultsCount = $("#resultsCount");
+  const tiedAreas = areaOrder.filter((key) => scores[key] === scores[areaOrder[0]]);
+  resultTitle.textContent = tiedAreas.length > 1
+    ? `Tu perfil combina necesidades de varias áreas`
+    : `Tu perfil apunta a ${winningArea.name.toLowerCase()}`;
+  resultCopy.textContent = tiedAreas.length > 1
+    ? `El puntaje quedó empatado entre ${tiedAreas.map((key) => areas[key].name).join(" y ")}. Los modelos se ordenan por coincidencia con las respuestas y después se aplican los filtros de peso, presupuesto y la asociación de catálogo seleccionada.`
+    : `El puntaje orientativo favorece el área de ${winningArea.name.toLowerCase()}. A continuación aparecen modelos ordenados por coincidencia, después de aplicar los filtros de peso, presupuesto y la asociación de catálogo seleccionada.`;
+
+  clinicalAlert.classList.add("hidden");
+  clinicalAlert.textContent = "";
+  const alerts = [];
+  if (level === 3 || level === 4) alerts.push("La lesión indicada requiere valoración y seguimiento por profesionales sanitarios. No selecciones una superficie terapéutica basándote únicamente en este cuestionario.");
+  else if (level === 1 || level === 2) alerts.push("La clasificación de una lesión y la selección de una superficie de apoyo deben confirmarse con un profesional sanitario.");
+  if (answers.ulcers === "unknown") alerts.push("Si sospechas que hay una úlcera por presión o no conoces su nivel, solicita valoración sanitaria; no intentes clasificarla con esta herramienta.");
+  if (answers.caregiver === "none") alerts.push("El resultado no sustituye la organización de cuidados y cambios de posición. Un colchón de aire no moviliza ni vigila por completo al paciente.");
+  if (answers.bed === "unknown") alerts.push("Antes de comprar, confirma el tipo de base y los requisitos de instalación del modelo.");
+  if (cap === null) alerts.push("No se indicó el peso exacto. Confirma el peso del paciente antes de elegir; los modelos deben utilizarse dentro de su capacidad máxima.");
+  if (alerts.length) { clinicalAlert.classList.remove("hidden"); clinicalAlert.innerHTML = alerts.map((item) => `<p>${escapeHtml(item)}</p>`).join(""); }
+
+  areaScoresEl.replaceChildren();
+  const maxAreaScore = Math.max(...Object.values(scores), 1);
+  areaOrder.forEach((key) => {
+    const row = document.createElement("div"); row.className = "area-score-row";
+    const name = document.createElement("span"); name.className = "area-score-name"; name.textContent = areas[key].name;
+    const bar = document.createElement("span"); bar.className = "area-score-bar";
+    const fill = document.createElement("span"); fill.className = "area-score-fill"; fill.style.width = `${scores[key] / maxAreaScore * 100}%`; bar.append(fill);
+    const value = document.createElement("strong"); value.className = "area-score-value"; value.textContent = `${scores[key]} ${scores[key] === 1 ? "punto" : "puntos"}`;
+    row.append(name, bar, value); areaScoresEl.append(row);
+  });
+
+  // El peso máximo sí es un filtro de compatibilidad; los demás criterios se reflejan en el puntaje.
+  let candidates = products.filter((product) => cap === null || product.maxWeight >= cap);
+  const weightUnknown = cap === null;
+  const overBudgetMode = false;
+
+  candidates = candidates.map((product) => ({ ...product, score: scoreProduct(product, answers, scores) }))
+    .filter((product) => product.score > 0)
+    .sort((a, b) => b.score - a.score || a.priceMin - b.priceMin)
+    .slice(0, 5);
+
+  productResults.replaceChildren();
+  if (!candidates.length) {
+    recommendationHeading.textContent = "No encontramos una coincidencia confirmada";
+    resultsCount.textContent = "0 modelos";
+    const noMatch = document.createElement("div"); noMatch.className = "empty-state";
+    const h = document.createElement("h4"); h.textContent = "Necesitas asesoría profesional directa.";
+    const p = document.createElement("p");
+    p.textContent = "Con las respuestas proporcionadas no podemos mostrar una opción compatible con suficiente confianza. Comunícate directamente con acolsa.mx para revisar el caso con asesoría profesional.";
+    const links = document.createElement("div"); links.className = "product-card-actions";
+    const contact = document.createElement("a"); contact.href = "https://acolsa.mx/contacto/"; contact.className = "text-link"; contact.target = "_blank"; contact.rel = "noopener"; contact.textContent = "Contactar a acolsa.mx ↗";
+    const phone = document.createElement("a"); phone.href = "tel:5576384584"; phone.className = "text-link"; phone.textContent = "Llamar al 55 7638 4584";
+    const email = document.createElement("a"); email.href = "mailto:ventas@acolsa.mx"; email.className = "text-link"; email.textContent = "Escribir a ventas@acolsa.mx";
+    links.append(contact, phone, email); noMatch.append(h, p, links); productResults.append(noMatch);
   } else {
-    resultTitle.textContent = "Estas características pueden ayudarte a acotar la búsqueda.";
-    resultCopy.textContent = "Usa esta orientación como punto de partida y confirma las medidas y especificaciones con el equipo de Acolsa antes de tomar una decisión.";
-    productTag.textContent = "PERFIL DE BÚSQUEDA";
-    productName.textContent = institutional
-      ? "Colchón para revisar según requisitos institucionales"
-      : "Colchón para revisar según uso y compatibilidad";
-    productDescription.textContent = "Esta versión inicial identifica características que conviene comparar; todavía no está conectada al catálogo real.";
-    const list = [];
-    if (adjustable) list.push("Comprobar que el modelo sea compatible con la articulación de la cama.");
-    if (hygiene) list.push("Verificar las características de la cubierta y los métodos de limpieza permitidos.");
-    if (institutional) list.push("Confirmar medidas, frecuencia de uso, mantenimiento y requisitos de la institución.");
-    if (!list.length) list.push("Comparar soporte, dimensiones, cubierta y uso previsto según las fichas técnicas.");
-    setReasons(reasons, list);
+    recommendationHeading.textContent = level ? `Modelos asociados en catálogo para el nivel ${level}` : "Modelos que coinciden con tus respuestas";
+    resultsCount.textContent = `${candidates.length} ${candidates.length === 1 ? "modelo" : "modelos"}`;
+    candidates.forEach((product, index) => productResults.append(createProductCard(product, index, { overBudgetMode, weightUnknown, level })));
   }
-
-  placeholderNote.textContent = "Prototipo: aún no selecciona productos reales. Antes de publicarlo, sustituye este resultado por modelos y especificaciones confirmados.";
-  const destination = a["SIGUIENTE PASO"] === "quote" || a["SIGUIENTE PASO"] === "advice"
-    ? "https://acolsa.mx/" : "https://acolsa.mx/";
-  contactLink.href = destination;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function setReasons(list, items) {
-  list.replaceChildren();
-  items.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    list.appendChild(li);
+function createProductCard(product, index, meta) {
+  const card = document.createElement("article"); card.className = `product-card${index === 0 ? " top-match" : ""}`;
+  const imageWrap = document.createElement("div"); imageWrap.className = "product-image-wrap";
+  const image = document.createElement("img"); image.src = product.image; image.alt = product.imageAlt || `Imagen de ${product.name}`; image.loading = index === 0 ? "eager" : "lazy"; image.decoding = "async";
+  if (product.imageFit) image.classList.add(`fit-${product.imageFit}`);
+  image.addEventListener("error", () => { imageWrap.classList.add("image-unavailable"); image.alt = "Imagen de producto no disponible"; image.removeAttribute("src"); const note = document.createElement("span"); note.className = "image-fallback"; note.textContent = product.name; imageWrap.append(note); }, { once: true });
+  imageWrap.append(image);
+  const body = document.createElement("div"); body.className = "product-card-body";
+  const rank = document.createElement("div"); rank.className = "product-rank"; rank.textContent = index === 0 ? "MAYOR COINCIDENCIA" : `ALTERNATIVA ${index}`;
+  const h = document.createElement("h4"); h.textContent = product.name;
+  const description = document.createElement("p"); description.className = "product-description"; description.textContent = product.description;
+  const stats = document.createElement("div"); stats.className = "product-stats";
+  [["Peso máximo", formatCapacity(product.maxWeight)], ["Garantía", product.warranty], ["Vida útil promedio", product.lifespan], ["Presupuesto", product.priceLabel]].forEach(([label, value]) => {
+    const stat = document.createElement("div"); stat.className = "product-stat";
+    const term = document.createElement("span"); term.textContent = label;
+    const detail = document.createElement("strong"); detail.textContent = value;
+    stat.append(term, detail); stats.append(stat);
   });
+  const tags = document.createElement("div"); tags.className = "product-tags";
+  const typeLabel = product.type === "static" ? "Estático con cortes" : product.type === "hybrid" ? "Dinámico híbrido" : "Dinámico de aire";
+  [typeLabel, areas[product.area].name, ...(product.zipper ? ["Cierre para celdas de aire"] : [])].forEach((label) => {
+    const tag = document.createElement("span"); tag.className = "product-tag-pill"; tag.textContent = label; tags.append(tag);
+  });
+  const featureList = document.createElement("ul"); featureList.className = "feature-list";
+  product.features.forEach((feature) => { const li = document.createElement("li"); li.textContent = feature; featureList.append(li); });
+  const reason = document.createElement("p"); reason.className = "match-reason";
+  const scoreReason = `Coincidencia con el perfil de ${areas[product.area].name.toLowerCase()}.`;
+  reason.textContent = meta.level && product.ulcerLevels.includes(meta.level)
+    ? `Modelo asociado en el catálogo al nivel ${meta.level}. Esta asociación no confirma idoneidad clínica.`
+    : meta.level
+      ? `Puntaje según tus respuestas generales; no está asociado en el catálogo al nivel ${meta.level}. Confirma la elección con un profesional sanitario.`
+      : scoreReason;
+  const actions = document.createElement("div"); actions.className = "product-card-actions";
+  const consult = document.createElement("a"); consult.href = product.productUrl; consult.target = "_blank"; consult.rel = "noopener"; consult.className = "text-link"; consult.textContent = "Ver producto en la tienda ↗";
+  const volume = document.createElement("a"); volume.href = "https://acolsa.mx/contacto/"; volume.target = "_blank"; volume.rel = "noopener"; volume.className = "text-link"; volume.textContent = "Cotizar por volumen ↗";
+  actions.append(consult, volume);
+  if (meta.overBudgetMode) { const note = document.createElement("p"); note.className = "over-budget-note"; note.textContent = "Alternativa fuera del presupuesto seleccionado: confirma el precio con acolsa.mx."; actions.prepend(note); }
+  if (meta.weightUnknown) { const note = document.createElement("p"); note.className = "over-budget-note"; note.textContent = "Compatibilidad de peso pendiente: confirma el peso y la capacidad máxima antes de comprar."; actions.prepend(note); }
+  body.append(rank, h, description, stats, tags, featureList, reason, actions);
+  card.append(imageWrap, body);
+  return card;
 }
 
 function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  }[char]));
+  return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[char]));
 }
