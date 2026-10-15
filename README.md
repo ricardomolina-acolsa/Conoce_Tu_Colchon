@@ -20,11 +20,11 @@ Abre `index.html` en un navegador o sirve la carpeta con una extensión como Liv
 
 ## Lógica del cuestionario
 
-- Tres respuestas (tiempo diario, duración prevista y movilidad) asignan puntos a Ambulatorio, Unidad de recuperación y Terapia/cuidados intensivos.
-- La capacidad máxima de peso funciona como filtro de compatibilidad cuando se conoce el peso.
-- La base, la presencia de cuidador, el presupuesto y la duración estimada ajustan el orden de los modelos.
-- Cuando se selecciona un nivel de úlcera diagnosticado, se muestran únicamente los modelos asociados a ese nivel en la tabla de catálogo proporcionada para este prototipo. Esto no constituye recomendación clínica ni confirma idoneidad médica.
-- Si el presupuesto no alcanza para los modelos que coinciden, se puede mostrar una alternativa fuera de presupuesto claramente identificada.
+- Cada respuesta aporta 1 punto base a todos los modelos y 2 puntos adicionales a los modelos que coinciden con ese criterio. Los resultados muestran hasta tres modelos mejor puntuados.
+- Tiempo diario de uso, duración prevista y movilidad también asignan puntos a las tres áreas hospitalarias.
+- La capacidad máxima de peso funciona como filtro de compatibilidad; si ningún modelo puede soportar el rango elegido, se muestran los canales de contacto de acolsa.mx para solicitar asesoría profesional.
+- Tipo de cama, disponibilidad de cuidador, presupuesto y nivel de úlcera ajustan la puntuación. Las asociaciones por nivel de úlcera son las proporcionadas para este prototipo y no constituyen recomendación clínica ni confirman idoneidad médica.
+- Cada tarjeta incluye un enlace a la ficha del producto en la tienda y otro para cotizar por volumen en la página de contacto.
 - No se envían las respuestas a un servidor.
 
 ## Antes de publicar para clientes
