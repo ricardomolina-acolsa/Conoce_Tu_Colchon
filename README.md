@@ -41,3 +41,12 @@ Edita el arreglo `questions` al inicio de `app.js`. Las reglas que generan el re
 ## Inspiración de estructura
 
 La experiencia toma como referencia general los cuestionarios interactivos de selección guiada, incluido https://who-is-your-ideal-killer.vercel.app/. El código de este proyecto es nuevo y no depende del código fuente de ese sitio.
+
+
+## Diseño visual actualizado
+
+Fondo blanco, tipografía negra, Montserrat y elementos geométricos lineales. Montserrat se carga desde Google Fonts; si no hay conexión, el navegador usa una alternativa sans-serif.
+
+## Importante antes de publicarlo
+
+Las reglas de recomendación y el ejemplo de producto siguen siendo provisionales. Antes de usarlo con clientes, comparte las fichas técnicas de los colchones hospitalarios (modelos, materiales, medidas, cubierta, uso previsto, compatibilidades y limitaciones). Con esa información podremos vincular las respuestas con productos reales y revisar cuidadosamente las preguntas relacionadas con necesidades clínicas. No debe presentarse como herramienta de diagnóstico ni como sustituto de una valoración profesional.
